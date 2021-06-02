@@ -84,7 +84,7 @@
       <normaloff>../iconos/CargaModelo.png</normaloff>../iconos/CargaModelo.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="Eliminar">
+   <widget class="QPushButton" name="buttonEliminar">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -266,7 +266,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="comboBoxAcercade">
    <property name="geometry">
     <rect>
      <x>500</x>

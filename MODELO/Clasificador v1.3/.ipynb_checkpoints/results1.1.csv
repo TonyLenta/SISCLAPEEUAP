@@ -1,0 +1,101 @@
+Filename,Predictions
+test_images\104.C. Cichlasoma festae (Fredy Nugra).JPG,Cichlasoma
+test_images\104.D. Cliclostoma festae (Fredy Nugra).png,Cichlasoma
+test_images\105.A.Cichlasoma ornatum (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\105.B.Cichlasoma ornatum (juvenil) (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\106. Oreochromis aureus (Eduardo Rebolledo).jpg,Sturisoma
+test_images\107. Oreochromis mossambicus (Jonathan Valdiviezo).JPG,Synbranchus
+test_images\108.A. Oreochromis niloticus (Windsor Aguirre).jpg,Apteronotus
+test_images\110.A. Dormitator latifrons (Windsor Aguirre).jpg,Pseudophallus
+test_images\110.B. Dormitator latifrons (Pedro Jiménez Prado).JPG,Pseudophallus
+test_images\111.A. Eleotris picta (Pedro Jiménez Prado).JPG,Pseudophallus
+test_images\111.B. Eleotris picta (Ronald Navarrete).jpg,Sturisoma
+test_images\112.A. Gobiomorus maculatus (Fredy Nugra).jpg,Sturisoma
+test_images\112.B. Gobiomorus maculatus (Juvenil) (Fredy Nugra).jpg,Sturisoma
+test_images\112.C. Gobiomorus maculatus (Pedro Jiménez Prado).JPG,Synbranchus
+test_images\112.D. Gobiomorus maculatus (comiendo un juvenil) (Pedro Jiménez Prado).JPG,Sturisoma
+test_images\113. Hemieleotris latifasciatus (Pedro Jiménez Prado).JPG,Synbranchus
+test_images\114.A. Awaous transandeanus (Pedro Jiménez Prado).JPG,Brycon
+test_images\114.B. Awaous transandeanus (Jonathan Valdiviezo).JPG,Awaous
+test_images\117. Gobioides peruanus (Enrique Laaz).jpg,Gobioides
+test_images\119. A. Sicydium hildebrandi (Fredy Nugra).jpg,Hyphessobrycon
+test_images\119. B. Sicydium hildebrandi (Fredy Nugra).JPG,Synbranchus
+test_images\119. D. Sicydium hildebrandi (Eduardo Rebolledo).JPG,Batrochoglanis
+test_images\12. Ichthyoelephas humeralis (Windsor Aguirre).jpg,Cichlasoma
+test_images\120. A. Sicydium rosebergii (Pedro Jiménez Prado) a) adulto, b) post-larva.tif,Sturisoma
+test_images\120. B. Sicydium rosebergii (Eduardo Rebolledo).JPG,Pseudophallus
+test_images\14.A. Hoplias malabaricus (Windsor Aguirre).jpg,Sturisoma
+test_images\18.A. Lebiasina bimaculata (Windsor Aguirre).jpg,Grundulus
+test_images\27.A. Hyphessobrycon ecuadoriensis (Windsor Aguirre).jpg,Grundulus
+test_images\27.B. Hyphessobrycon ecuadoriensis (Fredy Nugra).jpg,Cichlasoma
+test_images\32. Pseudochalceus bohlkei (Jonathan Valdiviezo).JPG,Cichlasoma
+test_images\44.B. Microglanis variegatus (Windsor Aguirre).jpg,Grundulus
+test_images\65.C. Hemiancistrus landoni (Detalle de la cabeza) (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\73. Astroblepus cyclopus (Fredy Nugra).JPG,Sturisoma
+test_images\74.A. Astroblepus eigenmanni (Pedro Jiménez Prado).JPG,Pseudophallus
+test_images\83.B. Astroblepus whymperi (Vista dorsal) (Pedro Jiménez Prado).JPG,Pseudophallus
+test_images\87.B. Brachyhypopomus occidentalis (Ronald Navarrete).JPG,Isorineloricaria
+test_images\96.A. Strongylura fluviatilis (Eduardo Rebolledo).JPG,Sturisoma
+test_images\98.A. Synbranchus marmoratus (adulto) (Fredy Nugra).jpg,Sternopygus
+test_images\98.B. Synbranchus marmoratus (juvenil) (Fredy Nugra).jpg,Synbranchus
+test_images\Ancistrus clementinae (Fredy Nugra).jpg,Synbranchus
+test_images\Ancistrus clementinae (Nathan Lujan).jpg,Isorineloricaria
+test_images\Ancistrus clementinae (Windsor Aguirre).jpg,Grundulus
+test_images\Apteronotus 2.jpg,Sternopygus
+test_images\Apteronotus.jpg,Pseudophallus
+test_images\Astroblepus.jpg,Sturisoma
+test_images\Astyanax 2.jpg,Isorineloricaria
+test_images\Astyanax festae (Fredy Nugra).jpg,Isorineloricaria
+test_images\Astyanax ruberrinus (Pedro Jiménez Prado).JPG,Pseudochalceus
+test_images\Brycon alburnus (Antonio Torres y Enrique Laaz).JPG,Cichlasoma
+test_images\Brycon alburnus (Ronald Navarrete).JPG,Batrochoglanis
+test_images\Brycon alburnus (Windsor Aguirre).jpg,Andinoacara
+test_images\Brycon atrocaudatus (Fredy Nugra).jpg,Cichlasoma
+test_images\Brycon atrocaudatus (Ronald Navarrte).JPG,Brachyhypopomus
+test_images\Brycon atrocaudatus (Windsor Aguirre).jpg,Isorineloricaria
+test_images\Brycon dentex (Captura en el río Santiago) (Euardo Rebolledo).JPG,Sturisoma
+test_images\Brycon dentex (Detalle de la cabeza)(Pedro Jiménez Prado).JPG,Sturisoma
+test_images\Brycon dentex (Windsor Aguirre).jpg,Cichlasoma
+test_images\Brycon oligolepis (Jonathan Valdiviezo).JPG,Agonostomus
+test_images\Brycon posidae (Fredy Nugra).JPG,Sturisoma
+test_images\Bryconamericus dahli (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\Bryconamericus dahli 2 (Pedro Jiménez Prado).JPG,Saccodon
+test_images\Chaetostoma aequinoctiale (Windsor Aguirre).jpg,Sturisoma
+test_images\Chaetostoma fischeri (Fredy Nugra).png,Synbranchus
+test_images\Chaetostoma marginatum (Eduardo Rebolledo).JPG,Synbranchus
+test_images\Gasteropelecus maculatus (Pedro Jiménez Prado).jpg,Ancistrus
+test_images\Gobioides.jpg,Sturisoma
+test_images\Gymnotus 2.jpg,Cichlasoma
+test_images\Gymnotus 3.jpg,Synbranchus
+test_images\Gymnotus.jpg,Pseudophallus
+test_images\Hoplias malabaricus (Windsor Aguirre).jpg,Sturisoma
+test_images\Hyphessobrycon (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\Ichthyoelephas humeralis (Windsor Aguirre).jpg,Cichlasoma
+test_images\Iotrabrycon praecox (Windsor Aguirre).jpg,Sturisoma
+test_images\Lebiasina aureoguttata (AntonioTorres y Enrique Laaz).jpg,Grundulus
+test_images\Lebiasina aureoguttata (Pedro Jiménez Prado).JPG,Cichlasoma
+test_images\Leporinus ecuadorensis. (Enrique Laaz).jpg,Microglanis
+test_images\Leporinus ecuadoriensis (Windsor Aguirre).jpg,Isorineloricaria
+test_images\Pimelodella modestus (Vista dorsal) Pedro Jiménez Prado).JPG,Synbranchus
+test_images\Pseudochalceus longianalis (Eduardo Rebolledo).JPG,Cichlasoma
+test_images\Pseudocurimata boehlkei (Nathan Lujan).jpg,Sturisoma
+test_images\Pseudocurimata boulengeri (Enrique Laaz).jpg,Apteronotus
+test_images\Pseudocurimata lineopunctata (Eduardo Rebolledo).JPG,Cichlasoma
+test_images\Pseudocurimata lineopunctata (Pedro Jiménez Prado).JPG,Synbranchus
+test_images\Pseudocurimata peruana (FMNH-97390)(Windsor Aguirre).jpg,Ichthyoelephas
+test_images\Pseudocurimata troscheli (Windsor Aguirre).jpg,Andinoacara
+test_images\Pseudophallus.jpg,Rhoadsia
+test_images\Rhoadsia 2 minor (Windsro Aguirre).JPG,Isorineloricaria
+test_images\Rhoadsia altipinna (Windsor Aguirre).jpg,Batrochoglanis
+test_images\Rhoadsia minor (Windsro Aguirre).jpg,Gasteropelecus
+test_images\Roeboides occidentalis (Eduardo Rebolledo).JPG,Cichlasoma
+test_images\Roeboides occidentalis (Pedro Jimènez Prado).JPG,Synbranchus
+test_images\Roeboides.jpg,Roeboides
+test_images\Saccodon terminalis (Windsor Aguirre).jpg,Cichlasoma
+test_images\Saccodon wagneri (Fredy Nugra).jpg,Cichlasoma
+test_images\Saccodon wagneri (Windsor Aguirre).jpg,Isorineloricaria
+test_images\Sacodon wagneri (Ronald Navarrete).JPG,Saccodon
+test_images\Strongylura.jpg,Synbranchus
+test_images\Sturisoma 2.jpg,Synbranchus
+test_images\Trichomycterus banneaui (FMNH-97422) (Windsor Aguirre).jpg,Cichlasoma
+test_images\Trichomycterus taenia (Fredy Nugra).JPG,Sturisoma
