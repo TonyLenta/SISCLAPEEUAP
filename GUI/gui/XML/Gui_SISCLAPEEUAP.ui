@@ -189,7 +189,7 @@
       <normaloff>../../iconos/derecha.png</normaloff>../../iconos/derecha.png</iconset>
     </property>
    </widget>
-   <widget class="QLabel" name="labelNombreimagen">
+   <widget class="QLabel" name="labelVersion">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -259,7 +259,7 @@
      <string>SISCLAPEEUAP </string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelVersion">
+   <widget class="QLabel" name="labelNumeroVersion">
     <property name="geometry">
      <rect>
       <x>80</x>
