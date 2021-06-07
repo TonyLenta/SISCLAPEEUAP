@@ -59,7 +59,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/CargaImagen2.png</normaloff>../iconos/CargaImagen2.png</iconset>
+      <normaloff>../../iconos/CargaImagen2.png</normaloff>../../iconos/CargaImagen2.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonCargarModelo">
@@ -81,7 +81,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/CargaModelo.png</normaloff>../iconos/CargaModelo.png</iconset>
+      <normaloff>../../iconos/CargaModelo.png</normaloff>../../iconos/CargaModelo.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonEliminar">
@@ -98,7 +98,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/Eliminar.png</normaloff>../iconos/Eliminar.png</iconset>
+      <normaloff>../../iconos/Eliminar.png</normaloff>../../iconos/Eliminar.png</iconset>
     </property>
    </widget>
   </widget>
@@ -135,7 +135,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/predecir.png</normaloff>../iconos/predecir.png</iconset>
+      <normaloff>../../iconos/predecir.png</normaloff>../../iconos/predecir.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonAnterior">
@@ -157,7 +157,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/izquierda.png</normaloff>../iconos/izquierda.png</iconset>
+      <normaloff>../../iconos/izquierda.png</normaloff>../../iconos/izquierda.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonSiguiente">
@@ -179,7 +179,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../iconos/derecha.png</normaloff>../iconos/derecha.png</iconset>
+      <normaloff>../../iconos/derecha.png</normaloff>../../iconos/derecha.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="labelNombreimagen">
