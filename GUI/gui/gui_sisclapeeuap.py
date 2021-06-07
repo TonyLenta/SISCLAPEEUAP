@@ -9,6 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon, QFont, QPalette, QImage, QPixmap
+from PyQt5.QtCore import (Qt, QDir, QFile, QFileInfo, QPropertyAnimation, QRect,
+                          QAbstractAnimation, QTranslator, QLocale, QLibraryInfo)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QPushButton, QMessageBox,
+                             QFrame, QLabel, QFileDialog )
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_framePrincipal(object):
