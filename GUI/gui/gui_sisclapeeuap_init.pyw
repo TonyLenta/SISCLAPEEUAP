@@ -27,6 +27,9 @@ class GUIinit(QtWidgets.QMainWindow):
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
+        longitud, altura = 150, 150
+        modelo = './modelo/modelo.h5'
+        pesos_modelo = './modelo/pesos.h5'
 
 
 # ===============FUNCION DE BLOQUEAR BOTONES===========================
@@ -93,6 +96,8 @@ class GUIinit(QtWidgets.QMainWindow):
         def establecerValores():
             labelConImagen.clear()
             labelConImagen.move(0, 0)
+            self.ui.labelVersion.setText("")
+            
 
             # Limpiar la barra de estado
             self.statusBar.clearMessage()
@@ -261,9 +266,7 @@ class GUIinit(QtWidgets.QMainWindow):
 # =======================FUNCION BOTON PREDECIR=====================================
 
     def Predict(file):
-        longitud, altura = 150, 150
-        modelo = './modelo/modelo.h5'
-        pesos_modelo = './modelo/pesos.h5'
+        
         # Carga el modelo del directorio y los pesos del modelo
         cnn = load_model(modelo)
         cnn.load_weights(pesos_modelo)
