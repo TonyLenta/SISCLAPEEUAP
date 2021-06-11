@@ -11,10 +11,8 @@ class GUIinit(QtWidgets.QMainWindow):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_framePrincipal()
         self.ui.setupUi(self)
-
         labelVersion = QLabel(self)
         labelVersion.setText(" SISCLAPEEUAP versión beta: 1.0  ")
-
         self.statusBar = self.statusBar()
         self.statusBar.addPermanentWidget(labelVersion, 0)
 # ===================== CONECTAR SEÑALES =====================
@@ -24,15 +22,14 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonSiguiente.clicked.connect(self.anteriorSiguiente)
         self.ui.buttomPredecir.clicked.connect(self.Predict)
         # self.ui.buttonPredecir.clicked.connect(self.anteriorSiguiente)
-# =============Establecer los valores predeterminados=========
+# =============ESTABLECER VALORES PREDETERMINADO=========
         self.posicion = int
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
 
 
-# Bloqueo de botones
-
+# ===============FUNCION DE BLOQUEAR BOTONES===========================
 
     def bloquearBotones(self, bool):
         self.ui.buttonCargarImagen.setEnabled(bool)
@@ -42,8 +39,8 @@ class GUIinit(QtWidgets.QMainWindow):
         # self.ui.buttomPredecir.setEnabled(bool)
         # self.ui.buttonCargarModelo.setEnabled(bool)
 
-# Funcion Mostrar
-# Mostrar imagen
+# =================FUNCION MOSTRAR============================
+
     def Mostrar(self, label, imagen, nombre, posicionX=650):
         imagen = QPixmap.fromImage(imagen)
 
@@ -67,7 +64,8 @@ class GUIinit(QtWidgets.QMainWindow):
         self.animacionMostar.setEndValue(QRect(0, 0, 640, 480))
         self.animacionMostar.start(QAbstractAnimation.DeleteWhenStopped)
 
-# Limpiar
+# ===========================FUNCION LIMPIAR==========================
+
     def Limpiar(self, labelConImagen, labelMostrarImagen, imagen, nombre,
                 posicionInternaX, posicionX=None):
 
@@ -89,8 +87,7 @@ class GUIinit(QtWidgets.QMainWindow):
         self.animacionLimpiar.start(QAbstractAnimation.DeleteWhenStopped)
 
 
-# Eliminar
-
+# ========================FUNCION ELIMINAR=====================================
 
     def Eliminar(self):
         def establecerValores():
@@ -105,7 +102,6 @@ class GUIinit(QtWidgets.QMainWindow):
             self.estadoAnterior, self.estadoSiguiente = False, False
             self.carpetaActual = QDir()
             self.imagenesCarpeta.clear()
-
             self.bloquearBotones(True)
 
         # Verificar que QLabel tiene imagen
@@ -114,10 +110,8 @@ class GUIinit(QtWidgets.QMainWindow):
             labelConImagen = self.ui.labelImagen
         elif self.ui.labelImagenUno.pixmap():
             labelConImagen = self.ui.labelImagenUno
-
         if labelConImagen:
             self.bloquearBotones(False)
-
             self.animacionEliminar = QPropertyAnimation(
                 labelConImagen, b"geometry")
             self.animacionEliminar.finished.connect(establecerValores)
@@ -127,8 +121,7 @@ class GUIinit(QtWidgets.QMainWindow):
             self.animacionEliminar.start(QAbstractAnimation.DeleteWhenStopped)
 
 
-# Siguiente
-
+# =============================FUNCION SIGUIENTE================================
 
     def anteriorSiguiente(self):
         if self.imagenesCarpeta:
@@ -208,7 +201,8 @@ class GUIinit(QtWidgets.QMainWindow):
                 self.Limpiar(labelConImagen, labelMostrarImagen, QImage(imagen),
                              nombre, posicionInternaX, posicionX)
 
-# Boton cargar
+
+# ==================================FUNCION DE BOTON CARGAR===============================================
     def Cargar(self):
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
@@ -264,8 +258,7 @@ class GUIinit(QtWidgets.QMainWindow):
                 self.Mostrar(self.ui.labelImagen, imagen, nombre)
 
 
-# Predict
-
+# =======================FUNCION BOTON PREDECIR=====================================
 
     def Predict(file):
         longitud, altura = 150, 150
