@@ -5,12 +5,13 @@ from keras.models import load_model
 
 from gui_sisclapeeuap import *
 
-class GUIinit(QtWidgets.QMainWindow): 
-    def __init__(self, parent=None) :
+
+class GUIinit(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
-        self.ui =Ui_framePrincipal()
+        self.ui = Ui_framePrincipal()
         self.ui.setupUi(self)
-	
+
         labelVersion = QLabel(self)
         labelVersion.setText(" SISCLAPEEUAP versión beta: 1.0  ")
 
@@ -22,61 +23,62 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonAnterior.clicked.connect(self.anteriorSiguiente)
         self.ui.buttonSiguiente.clicked.connect(self.anteriorSiguiente)
         self.ui.buttomPredecir.clicked.connect(self.Predict)
-	#self.ui.buttonPredecir.clicked.connect(self.anteriorSiguiente)	
+        # self.ui.buttonPredecir.clicked.connect(self.anteriorSiguiente)
 # =============Establecer los valores predeterminados=========
         self.posicion = int
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
-		
 
 
 # Bloqueo de botones
+
+
     def bloquearBotones(self, bool):
         self.ui.buttonCargarImagen.setEnabled(bool)
         self.ui.buttonEliminar.setEnabled(bool)
         self.ui.buttonAnterior.setEnabled(bool)
         self.ui.buttonSiguiente.setEnabled(bool)
-		#self.ui.buttomPredecir.setEnabled(bool)
-		#self.ui.buttonCargarModelo.setEnabled(bool)
+        # self.ui.buttomPredecir.setEnabled(bool)
+        # self.ui.buttonCargarModelo.setEnabled(bool)
 
-#Funcion Mostrar 
-#Mostrar imagen  
-    def Mostrar (self, label, imagen, nombre, posicionX=650):
+# Funcion Mostrar
+# Mostrar imagen
+    def Mostrar(self, label, imagen, nombre, posicionX=650):
         imagen = QPixmap.fromImage(imagen)
 
         # Escalar imagen a 640x480 si el ancho es mayor a 640 o el alto mayor a 480
         if imagen.width() > 640 or imagen.height() > 480:
-            imagen = imagen.scaled(640, 480, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            imagen = imagen.scaled(
+                640, 480, Qt.KeepAspectRatio, Qt.SmoothTransformation)
 
         # Mostrar imagen
         label.setPixmap(imagen)
-		
-		#Mostrar nombre en label
-		
+
+        # Mostrar nombre en label
 
         # Animación (al finalizar la animación se muestra en la barra de estado el nombre y la extensión de la imagen
-        # y se desbloquean los botones).       
+        # y se desbloquean los botones).
         self.animacionMostar = QPropertyAnimation(label, b"geometry")
-        self.animacionMostar.finished.connect(lambda: (self.statusBar.showMessage(nombre),self.ui.labelVersion.setText(nombre),
-                                                     self.bloquearBotones(True)))
+        self.animacionMostar.finished.connect(lambda: (self.statusBar.showMessage(nombre), self.ui.labelVersion.setText(nombre),
+                                                       self.bloquearBotones(True)))
         self.animacionMostar.setDuration(200)
         self.animacionMostar.setStartValue(QRect(posicionX, 0, 640, 480))
         self.animacionMostar.setEndValue(QRect(0, 0, 640, 480))
         self.animacionMostar.start(QAbstractAnimation.DeleteWhenStopped)
 
-#Limpiar
+# Limpiar
     def Limpiar(self, labelConImagen, labelMostrarImagen, imagen, nombre,
                 posicionInternaX, posicionX=None):
 
-        #Continuar
+        # Continuar
         def Continuar(estado):
             if estado:
                 if posicionX:
                     self.Mostrar(labelMostrarImagen, imagen, nombre, posicionX)
                 else:
                     self.Mostrar(labelMostrarImagen, imagen, nombre)
-            
+
         self.animacionLimpiar = QPropertyAnimation(labelConImagen, b"geometry")
         self.animacionLimpiar.finished.connect(lambda: labelConImagen.clear())
         self.animacionLimpiar.setDuration(200)
@@ -85,9 +87,11 @@ class GUIinit(QtWidgets.QMainWindow):
         self.animacionLimpiar.setStartValue(QRect(0, 0, 640, 480))
         self.animacionLimpiar.setEndValue(QRect(posicionInternaX, 0, 640, 480))
         self.animacionLimpiar.start(QAbstractAnimation.DeleteWhenStopped)
- 
- 
-#Eliminar
+
+
+# Eliminar
+
+
     def Eliminar(self):
         def establecerValores():
             labelConImagen.clear()
@@ -103,18 +107,19 @@ class GUIinit(QtWidgets.QMainWindow):
             self.imagenesCarpeta.clear()
 
             self.bloquearBotones(True)
-            
+
         # Verificar que QLabel tiene imagen
         labelConImagen = ""
         if self.ui.labelImagen.pixmap():
             labelConImagen = self.ui.labelImagen
         elif self.ui.labelImagenUno.pixmap():
             labelConImagen = self.ui.labelImagenUno
-                
+
         if labelConImagen:
             self.bloquearBotones(False)
-            
-            self.animacionEliminar = QPropertyAnimation(labelConImagen, b"geometry")
+
+            self.animacionEliminar = QPropertyAnimation(
+                labelConImagen, b"geometry")
             self.animacionEliminar.finished.connect(establecerValores)
             self.animacionEliminar.setDuration(200)
             self.animacionEliminar.setStartValue(QRect(0, 0, 640, 480))
@@ -122,23 +127,27 @@ class GUIinit(QtWidgets.QMainWindow):
             self.animacionEliminar.start(QAbstractAnimation.DeleteWhenStopped)
 
 
-#Siguiente 
+# Siguiente
+
+
     def anteriorSiguiente(self):
         if self.imagenesCarpeta:
             widget = self.sender().objectName()
-            
+
             if widget == "Anterior":
                 self.estadoAnterior = True if self.posicion == 0 else False
                 self.estadoSiguiente = False
-                    
+
                 self.posicion -= 1 if self.posicion > 0 else 0
-                posicionInternaX, posicionX = 650, -650 
+                posicionInternaX, posicionX = 650, -650
             else:
-                self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta)-1 else False
+                self.estadoSiguiente = True if self.posicion == len(
+                    self.imagenesCarpeta)-1 else False
                 self.estadoAnterior = False
-                    
-                self.posicion += 1 if self.posicion < len(self.imagenesCarpeta)-1 else 0
-                posicionInternaX, posicionX = -650, 650 
+
+                self.posicion += 1 if self.posicion < len(
+                    self.imagenesCarpeta)-1 else 0
+                posicionInternaX, posicionX = -650, 650
 
             if self.estadoAnterior or self.estadoSiguiente:
                 return
@@ -158,12 +167,14 @@ class GUIinit(QtWidgets.QMainWindow):
                     if not imagenes:
                         self.Eliminar()
                         return
-                    
-                    self.imagenesCarpeta = [imagen.absoluteFilePath() for imagen in imagenes]
+
+                    self.imagenesCarpeta = [
+                        imagen.absoluteFilePath() for imagen in imagenes]
 
                     self.posicion = randint(0, len(self.imagenesCarpeta)-1)
                     self.estadoAnterior = True if self.posicion == 0 else False
-                    self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta)-1 else False
+                    self.estadoSiguiente = True if self.posicion == len(
+                        self.imagenesCarpeta)-1 else False
                 elif QImage(imagen).isNull():
                     del self.imagenesCarpeta[self.posicion]
 
@@ -173,7 +184,8 @@ class GUIinit(QtWidgets.QMainWindow):
 
                     self.posicion = randint(0, len(self.imagenesCarpeta)-1)
                     self.estadoAnterior = True if self.posicion == 0 else False
-                    self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta)-1 else False
+                    self.estadoSiguiente = True if self.posicion == len(
+                        self.imagenesCarpeta)-1 else False
 
                 imagen = self.imagenesCarpeta[self.posicion]
 
@@ -189,13 +201,14 @@ class GUIinit(QtWidgets.QMainWindow):
                 nombre = QFileInfo(imagen).fileName()
 
                 # Label en el que se va a mostrar la imagen
-                labelMostrarImagen = self.ui.labelImagen if self.ui.labelImagenUno.pixmap() else self.ui.labelImagenUno
+                labelMostrarImagen = self.ui.labelImagen if self.ui.labelImagenUno.pixmap(
+                ) else self.ui.labelImagenUno
 
                 # Quitar la imagen actual y mostrar la siguiente
                 self.Limpiar(labelConImagen, labelMostrarImagen, QImage(imagen),
                              nombre, posicionInternaX, posicionX)
 
-#Boton cargar
+# Boton cargar
     def Cargar(self):
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
@@ -208,59 +221,69 @@ class GUIinit(QtWidgets.QMainWindow):
                 labelConImagen = self.ui.labelImagen
             elif self.ui.labelImagenUno.pixmap():
                 labelConImagen = self.ui.labelImagenUno
-                
+
             imagen = QImage(nombreImagen)
             if imagen.isNull():
                 if labelConImagen:
                     self.Eliminar()
-                    
+
                 QMessageBox.information(self, "Visor de imágenes",
                                         "No se puede cargar %s." % nombreImagen)
                 return
-            
+
             # Obtener ruta de la carpeta que contiene la imagen seleccionada
-            self.carpetaActual = QDir(QFileInfo(nombreImagen).absoluteDir().path())
+            self.carpetaActual = QDir(
+                QFileInfo(nombreImagen).absoluteDir().path())
 
             # Obtener la ruta y el nombre de las imagenes que se encuentren en la carpeta de
             # la imagen seleccionada
             imagenes = self.carpetaActual.entryInfoList(["*.jpg", "*.png", "*.ico", "*.bmp"],
                                                         QDir.Files, QDir.Name)
-            self.imagenesCarpeta = [imagen.absoluteFilePath() for imagen in imagenes]
+            self.imagenesCarpeta = [imagen.absoluteFilePath()
+                                    for imagen in imagenes]
 
             self.posicion = self.imagenesCarpeta.index(nombreImagen)
             self.estadoAnterior = True if self.posicion == 0 else False
-            self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta)-1 else False
+            self.estadoSiguiente = True if self.posicion == len(
+                self.imagenesCarpeta)-1 else False
 
             # Función encargada de bloquear o desbloquear los botones
             self.bloquearBotones(False)
 
             # Nombre y extensión de la imagen
             nombre = QFileInfo(nombreImagen).fileName()
-			#self.ui.labelVersion.setText.str(nombre)
-            
+            # self.ui.labelVersion.setText.str(nombre)
+
             if labelConImagen:
                 posicionInternaX = -650
-                labelMostrarImagen = self.ui.labelImagen if self.ui.labelImagenUno.pixmap() else self.ui.labelImagenUno
-                self.Limpiar(labelConImagen, labelMostrarImagen, imagen, nombre, posicionInternaX)
+                labelMostrarImagen = self.ui.labelImagen if self.ui.labelImagenUno.pixmap(
+                ) else self.ui.labelImagenUno
+                self.Limpiar(labelConImagen, labelMostrarImagen,
+                             imagen, nombre, posicionInternaX)
             else:
                 self.Mostrar(self.ui.labelImagen, imagen, nombre)
-				
 
-#Predict
+
+# Predict
+
+
     def Predict(file):
-        longitud, altura = 150, 150 
-        modelo = './modelo/modelo.h5' 
+        longitud, altura = 150, 150
+        modelo = './modelo/modelo.h5'
         pesos_modelo = './modelo/pesos.h5'
-        # Carga el modelo del directorio y los pesos del modelo 
-        cnn = load_model(modelo)   
-        cnn.load_weights(pesos_modelo) 
-        #Carga imagen
+        # Carga el modelo del directorio y los pesos del modelo
+        cnn = load_model(modelo)
+        cnn.load_weights(pesos_modelo)
+        # Carga imagen
         x = load_img(file, target_size=(longitud, altura))
-        x = img_to_array(x) # Convierte la imagen en un arreglo
-        x = np.expand_dims(x, axis=0) #Agrega una  dimensino al arreglo para procesar la informacion
-        array = cnn.predict(x) #Dos dimenciones [1,0,0]LLama a la red para predicir la imagen
-        result = array[0] #Dimension cero que contiene los nombres
-        answer = np.argmax(result) #Trae el indice del valor mas alto de resultado
+        x = img_to_array(x)  # Convierte la imagen en un arreglo
+        # Agrega una  dimensino al arreglo para procesar la informacion
+        x = np.expand_dims(x, axis=0)
+        # Dos dimenciones [1,0,0]LLama a la red para predicir la imagen
+        array = cnn.predict(x)
+        result = array[0]  # Dimension cero que contiene los nombres
+        # Trae el indice del valor mas alto de resultado
+        answer = np.argmax(result)
         if answer == 0:
             print("pred: bala")
         elif answer == 1:
@@ -324,10 +347,8 @@ class GUIinit(QtWidgets.QMainWindow):
         return answer
 
 
-
-if __name__== "__main__":
-              app = QtWidgets.QApplication(sys.argv)
-              myapp = GUIinit()
-              myapp.show()
-              sys.exit(app.exec_())
-              
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    myapp = GUIinit()
+    myapp.show()
+    sys.exit(app.exec_())
