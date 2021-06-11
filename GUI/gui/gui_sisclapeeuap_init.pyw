@@ -27,9 +27,9 @@ class GUIinit(QtWidgets.QMainWindow):
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
-        longitud, altura = 150, 150
-        modelo = './modelo/modelo.h5'
-        pesos_modelo = './modelo/pesos.h5'
+        self.longitud, self.altura = 150, 150
+        self.modelo = './modelo/modelo.h5'
+        self.pesos_modelo = './modelo/pesos.h5'
 
 
 # ===============FUNCION DE BLOQUEAR BOTONES===========================
@@ -39,6 +39,7 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonEliminar.setEnabled(bool)
         self.ui.buttonAnterior.setEnabled(bool)
         self.ui.buttonSiguiente.setEnabled(bool)
+        self.ui.CargarModelo.setEnabled(bool)
         # self.ui.buttomPredecir.setEnabled(bool)
         # self.ui.buttonCargarModelo.setEnabled(bool)
 
