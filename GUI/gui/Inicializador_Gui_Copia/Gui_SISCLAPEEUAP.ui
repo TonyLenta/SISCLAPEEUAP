@@ -114,7 +114,7 @@
    <property name="title">
     <string>Clasificador</string>
    </property>
-   <widget class="QPushButton" name="buttomPredecir">
+   <widget class="QPushButton" name="buttonPredecir">
     <property name="geometry">
      <rect>
       <x>30</x>
