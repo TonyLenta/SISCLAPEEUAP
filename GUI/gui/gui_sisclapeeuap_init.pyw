@@ -20,17 +20,26 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonEliminar.clicked.connect(self.Eliminar)
         self.ui.buttonAnterior.clicked.connect(self.anteriorSiguiente)
         self.ui.buttonSiguiente.clicked.connect(self.anteriorSiguiente)
-        self.ui.buttomPredecir.clicked.connect(self.Predict)
+        self.ui.buttonPredecir.clicked.connect(self.Predict)
         # self.ui.buttonPredecir.clicked.connect(self.anteriorSiguiente)
+
 # =============ESTABLECER VALORES PREDETERMINADO=========
         self.posicion = int
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
+        
+        #Parametros para bloquear funciones de cargar imagen y predecir imagen
+        self.ui.buttonCargarModelo.setEnabled(False)
+        self.ui.buttonPredecir.setEnabled(False) 
+        self.ui.buttonEliminar.setEnabled(False)
+        self.ui.buttonSiguiente.setEnabled(False)
+        self.ui.buttonAnterior.setEnabled(False)
+       
+        #Parametros para cargar modelo entrenado de la CNN
         self.longitud, self.altura = 150, 150
         self.modelo = './modelo/modelo.h5'
         self.pesos_modelo = './modelo/pesos.h5'
-
 
 # ===============FUNCION DE BLOQUEAR BOTONES===========================
 
@@ -39,13 +48,14 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonEliminar.setEnabled(bool)
         self.ui.buttonAnterior.setEnabled(bool)
         self.ui.buttonSiguiente.setEnabled(bool)
-        self.ui.CargarModelo.setEnabled(bool)
-        # self.ui.buttomPredecir.setEnabled(bool)
+        self.ui.buttonCargarModelo.setEnabled(bool)
+        # self.ui.buttonPredecir.setEnabled(bool)
         # self.ui.buttonCargarModelo.setEnabled(bool)
 
 # =================FUNCION MOSTRAR============================
 
     def Mostrar(self, label, imagen, nombre, posicionX=650):
+       
         imagen = QPixmap.fromImage(imagen)
 
         # Escalar imagen a 640x480 si el ancho es mayor a 640 o el alto mayor a 480
@@ -110,6 +120,13 @@ class GUIinit(QtWidgets.QMainWindow):
             self.imagenesCarpeta.clear()
             self.bloquearBotones(True)
 
+        #Parametros para bloquear funciones de cargar imagen y predecir imagen
+        self.ui.buttonCargarModelo.setEnabled(False)
+        self.ui.buttonPredecir.setEnabled(False) 
+        self.ui.buttonEliminar.setEnabled(False)
+        self.ui.buttonSiguiente.setEnabled(False)
+        self.ui.buttonAnterior.setEnabled(False)
+        
         # Verificar que QLabel tiene imagen
         labelConImagen = ""
         if self.ui.labelImagen.pixmap():
@@ -210,6 +227,12 @@ class GUIinit(QtWidgets.QMainWindow):
 
 # ==================================FUNCION DE BOTON CARGAR===============================================
     def Cargar(self):
+
+        #Activa los botones de las funcionalidades cargar modelo y predecir junto y pasar de imagen 
+        self.ui.buttonCargarModelo.setEnabled(True)
+        self.ui.buttonPredecir.setEnabled(True)
+        self.ui.buttonSiguiente.setEnabled(True)
+        self.ui.buttonAnterior.setEnabled(True)
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
                                                       "Archivos de imagen (*.jpg *.png *.ico *.bmp)")
