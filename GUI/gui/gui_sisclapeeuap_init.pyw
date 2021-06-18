@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+from random import randint
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 from gui_sisclapeeuap import *
@@ -40,8 +41,6 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonEliminar.setEnabled(False)
         self.ui.buttonSiguiente.setEnabled(False)
         self.ui.buttonAnterior.setEnabled(False)
-       
-        
 
 # ===============FUNCION DE BLOQUEAR BOTONES===========================
 
@@ -56,7 +55,7 @@ class GUIinit(QtWidgets.QMainWindow):
 
 # =================FUNCION MOSTRAR============================
 
-    def Mostrar(self, label, imagen, nombre, posicionX=650):
+    def Mostrar(self, label, imagen, nombre, carpeta, posicionX=650):
        
         imagen = QPixmap.fromImage(imagen)
 
@@ -73,7 +72,7 @@ class GUIinit(QtWidgets.QMainWindow):
         # Animación (al finalizar la animación se muestra en la barra de estado el nombre y la extensión de la imagen
         # y se desbloquean los botones).
         self.animacionMostar = QPropertyAnimation(label, b"geometry")
-        self.animacionMostar.finished.connect(lambda: (self.statusBar.showMessage(nombre), self.ui.labelVersion.setText(nombre),
+        self.animacionMostar.finished.connect(lambda: (self.statusBar.showMessage(nombre), self.ui.labelVersion.setText(carpeta),
                                                        self.bloquearBotones(True)))
         self.animacionMostar.setDuration(200)
         self.animacionMostar.setStartValue(QRect(posicionX, 0, 640, 480))
@@ -84,14 +83,15 @@ class GUIinit(QtWidgets.QMainWindow):
 
     def Limpiar(self, labelConImagen, labelMostrarImagen, imagen, nombre,
                 posicionInternaX, posicionX=None):
-
+                
+        carperta=""
         # Continuar
         def Continuar(estado):
             if estado:
                 if posicionX:
-                    self.Mostrar(labelMostrarImagen, imagen, nombre, posicionX)
+                    self.Mostrar(labelMostrarImagen, imagen, nombre, carperta,posicionX)
                 else:
-                    self.Mostrar(labelMostrarImagen, imagen, nombre)
+                    self.Mostrar(labelMostrarImagen, imagen, nombre, carpeta="")
 
         self.animacionLimpiar = QPropertyAnimation(labelConImagen, b"geometry")
         self.animacionLimpiar.finished.connect(lambda: labelConImagen.clear())
@@ -101,7 +101,6 @@ class GUIinit(QtWidgets.QMainWindow):
         self.animacionLimpiar.setStartValue(QRect(0, 0, 640, 480))
         self.animacionLimpiar.setEndValue(QRect(posicionInternaX, 0, 640, 480))
         self.animacionLimpiar.start(QAbstractAnimation.DeleteWhenStopped)
-
 
 # ========================FUNCION ELIMINAR=====================================
 
@@ -238,7 +237,7 @@ class GUIinit(QtWidgets.QMainWindow):
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
                                                       "Archivos de imagen (*.jpg *.png *.ico *.bmp)")
-
+        
         if nombreImagen:
             # Verificar que QLabel tiene imagen
             labelConImagen = ""
@@ -260,6 +259,8 @@ class GUIinit(QtWidgets.QMainWindow):
             self.carpetaActual = QDir(
                 QFileInfo(nombreImagen).absoluteDir().path())
 
+            
+
             # Obtener la ruta y el nombre de las imagenes que se encuentren en la carpeta de
             # la imagen seleccionada
             imagenes = self.carpetaActual.entryInfoList(["*.jpg", "*.png", "*.ico", "*.bmp"],
@@ -277,7 +278,11 @@ class GUIinit(QtWidgets.QMainWindow):
 
             # Nombre y extensión de la imagen
             nombre = QFileInfo(nombreImagen).fileName()
-            # self.ui.labelVersion.setText.str(nombre)
+            carpeta = QFileInfo(nombreImagen).absoluteDir().path()+"/"+nombre
+            
+
+            self.imagenesCarpeta = [imagen.absoluteFilePath()
+                                    for imagen in imagenes]
 
             if labelConImagen:
                 posicionInternaX = -650
@@ -286,26 +291,17 @@ class GUIinit(QtWidgets.QMainWindow):
                 self.Limpiar(labelConImagen, labelMostrarImagen,
                              imagen, nombre, posicionInternaX)
             else:
-                self.Mostrar(self.ui.labelImagen, imagen, nombre)
+                self.Mostrar(self.ui.labelImagen, imagen, nombre, carpeta)
+
+
+
 
 # ==================Predecir========================================================
-    def Predecir(self):
-        self.Predict('Ancistrus (Fredy Nugra).jpg')
-
-
-# =======================FUNCION BOTON PREDECIR=====================================
-
-    def Predict(self, file):
-        
-        x = load_img(file, target_size=(self.longitud, self.altura))
-        x = img_to_array(x)  # Convierte la imagen en un arreglo
-        # Agrega una  dimensino al arreglo para procesar la informacion
-        x = np.expand_dims(x, axis=0)
-        # Dos dimenciones [1,0,0]LLama a la red para predicir la imagen
-        array = self.cnn.predict(x)
-        result = array[0]  # Dimension cero que contiene los nombres
-        # Trae el indice del valor mas alto de resultado
-        answer = np.argmax(result)
+    def Predecir(self):   
+        print(self.ui.labelVersion.text())
+        print("aqui")
+        answer=self.Predict(self.ui.labelVersion.text())
+        #Trae el indice del valor mas alto de resultado
         if answer == 0:
             print("pred: bala")
         elif answer == 1:
@@ -366,6 +362,23 @@ class GUIinit(QtWidgets.QMainWindow):
             print("Yellow Tang")
         elif answer == 29:
             print("zebra danio fish")
+
+
+
+
+
+# =======================FUNCION BOTON PREDECIR=====================================
+
+    def Predict(self, file): 
+        x = load_img(file, target_size=(self.longitud, self.altura))
+        x = img_to_array(x)  # Convierte la imagen en un arreglo
+        # Agrega una  dimensino al arreglo para procesar la informacion
+        x = np.expand_dims(x, axis=0)
+        # Dos dimenciones [1,0,0]LLama a la red para predicir la imagen
+        array = self.cnn.predict(x)
+        result = array[0]  # Dimension cero que contiene los nombres
+        # Trae el indice del valor mas alto de resultado
+        answer = np.argmax(result)        
         return answer
 
 
