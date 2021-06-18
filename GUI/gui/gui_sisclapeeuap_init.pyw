@@ -2,7 +2,6 @@ import sys
 import numpy as np
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
-
 from gui_sisclapeeuap import *
 
 
@@ -20,7 +19,7 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonEliminar.clicked.connect(self.Eliminar)
         self.ui.buttonAnterior.clicked.connect(self.anteriorSiguiente)
         self.ui.buttonSiguiente.clicked.connect(self.anteriorSiguiente)
-        self.ui.buttonPredecir.clicked.connect(self.Predict)
+        self.ui.buttonPredecir.clicked.connect(self.Predecir)
         # self.ui.buttonPredecir.clicked.connect(self.anteriorSiguiente)
 
 # =============ESTABLECER VALORES PREDETERMINADO=========
@@ -28,6 +27,12 @@ class GUIinit(QtWidgets.QMainWindow):
         self.estadoAnterior, self.estadoSiguiente = False, False
         self.carpetaActual = QDir()
         self.imagenesCarpeta = []
+        #Parametros para cargar modelo entrenado de la CNN
+        self.longitud, self.altura = 150, 150 #para estanderizar el tamano
+        self.modelo = './modelo/modelo.h5' 
+        self.pesos_modelo = './modelo/pesos.h5'
+        self.cnn = load_model(self.modelo)  # Carga el modelo del directorio 
+        self.cnn.load_weights(self.pesos_modelo) #Carga los pesos del modelo 
         
         #Parametros para bloquear funciones de cargar imagen y predecir imagen
         self.ui.buttonCargarModelo.setEnabled(False)
@@ -36,10 +41,7 @@ class GUIinit(QtWidgets.QMainWindow):
         self.ui.buttonSiguiente.setEnabled(False)
         self.ui.buttonAnterior.setEnabled(False)
        
-        #Parametros para cargar modelo entrenado de la CNN
-        self.longitud, self.altura = 150, 150
-        self.modelo = './modelo/modelo.h5'
-        self.pesos_modelo = './modelo/pesos.h5'
+        
 
 # ===============FUNCION DE BLOQUEAR BOTONES===========================
 
@@ -286,21 +288,21 @@ class GUIinit(QtWidgets.QMainWindow):
             else:
                 self.Mostrar(self.ui.labelImagen, imagen, nombre)
 
+# ==================Predecir========================================================
+    def Predecir(self):
+        self.Predict('Ancistrus (Fredy Nugra).jpg')
+
 
 # =======================FUNCION BOTON PREDECIR=====================================
 
-    def Predict(file):
+    def Predict(self, file):
         
-        # Carga el modelo del directorio y los pesos del modelo
-        cnn = load_model(modelo)
-        cnn.load_weights(pesos_modelo)
-        # Carga imagen
-        x = load_img(file, target_size=(longitud, altura))
+        x = load_img(file, target_size=(self.longitud, self.altura))
         x = img_to_array(x)  # Convierte la imagen en un arreglo
         # Agrega una  dimensino al arreglo para procesar la informacion
         x = np.expand_dims(x, axis=0)
         # Dos dimenciones [1,0,0]LLama a la red para predicir la imagen
-        array = cnn.predict(x)
+        array = self.cnn.predict(x)
         result = array[0]  # Dimension cero que contiene los nombres
         # Trae el indice del valor mas alto de resultado
         answer = np.argmax(result)
@@ -367,6 +369,7 @@ class GUIinit(QtWidgets.QMainWindow):
         return answer
 
 
+    
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myapp = GUIinit()
